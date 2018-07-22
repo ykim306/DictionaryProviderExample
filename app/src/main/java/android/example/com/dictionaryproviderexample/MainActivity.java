@@ -30,6 +30,9 @@ import android.support.v4.widget.SimpleCursorAdapter;
  */
 public class MainActivity extends AppCompatActivity {
 
+    private static final String[] FROMCOLUMNS = {Words.WORD, Words.FREQUENCY};
+    private static final int[] TOVIEW = {android.R.id.text1, android.R.id.text2};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,16 +47,9 @@ public class MainActivity extends AppCompatActivity {
         // Get a Cursor containing all of the rows in the Words table
         Cursor cursor = resolver.query(UserDictionary.Words.CONTENT_URI, null, null, null, null);
 
-//        String[] fromColumns = {ContactsContract.Data.DISPLAY_NAME,
-//                ContactsContract.CommonDataKinds.Phone.NUMBER};
-//        int[] toViews = {R.id.display_name, R.id.phone_number};
-
-        String[] fromColumns = {Words.WORD, Words.FREQUENCY};
-        int[] toView = {R.id.text1, R.id.text2};
-
         // Set the Adapter to fill the standard two_line_list_item layout with data from the Cursor.
         SimpleCursorAdapter adapter = new SimpleCursorAdapter(this
-                , android.R.layout.two_line_list_item, cursor, fromColumns, toView, 0);
+                , android.R.layout.two_line_list_item, cursor, FROMCOLUMNS, TOVIEW, 0);
 
         // Don't forget to attach the adapter to the ListView
         dictListView.setAdapter(adapter);
